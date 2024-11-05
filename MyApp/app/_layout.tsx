@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return (
     <Stack
-      initialRouteName="LoginScreen" // Đặt màn hình LoginScreen là màn hình khởi động
+      initialRouteName="index" // Đặt màn hình LoginScreen là màn hình khởi động
       screenOptions={{
         headerTintColor: '#fff', // Màu của nút trong header
         headerTitleAlign: 'center', // Căn giữa tiêu đề header

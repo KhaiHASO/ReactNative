@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import foodFakeData from './foodFakeData'
 import { useRouter } from 'expo-router';
-
+import { NHOMMONAN, CUAHANG } from '../FoodAppData/FoodData'; // Import dữ liệu từ FoodData
 
 const HomeScreen = () => {
     const router = useRouter();
+    
     return (
         <View style={styles.container}>
             {/* Gradient Header */}
@@ -30,39 +30,38 @@ const HomeScreen = () => {
             <ScrollView style={styles.content}>
                 {/* Danh mục */}
                 <FlatList
-                    data={foodFakeData.category}
+                    data={NHOMMONAN}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item) => item.name}
+                    keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View style={styles.categoryItem}>
-                            <Image source={{ uri: item.image }} style={styles.categoryImage} />
+                            <Image source={item.icon} style={styles.categoryImage} />
                             <Text style={styles.categoryName}>{item.name}</Text>
                         </View>
                     )}
                 />
 
-                {/* Banner */}
+                {/* Banner (Bạn có thể thêm dữ liệu banner nếu có) */}
                 <View style={styles.bannerContainer}>
-                    <Image source={{ uri: foodFakeData.banner[0].image }} style={styles.bannerImage} />
-                    <Text style={styles.bannerText}>{foodFakeData.banner[0].name}</Text>
+                    {/* <Image source={require('../FoodAppData/FoodImage/banner.jpg')} style={styles.bannerImage} /> */}
+                    <Text style={styles.bannerText}>Khuyến mãi đặc biệt 30%</Text>
                 </View>
 
                 {/* Danh sách cửa hàng */}
                 <Text style={styles.sectionTitle}>Cửa hàng tốt nhất trong khu vực</Text>
                 <FlatList
-                    data={foodFakeData.store}
+                    data={CUAHANG}
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    keyExtractor={(item) => item.name}
+                    keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <TouchableOpacity
                             style={styles.storeItem}
                             onPress={() => router.push("StoreDetailScreen")} // Điều hướng đến StoreDetailScreen
                         >
-                            <Image source={{ uri: item.image }} style={styles.storeImage} />
+                            <Image source={item.photo} style={styles.storeImage} />
                             <Text style={styles.storeName}>{item.name}</Text>
-                            <Text style={styles.storeRating}>⭐ {item.rating}</Text>
                         </TouchableOpacity>
                     )}
                 />
@@ -168,10 +167,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginVertical: 8,
         textAlign: 'center',
-    },
-    storeRating: {
-        fontSize: 12,
-        color: '#888',
     },
 });
 
