@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { NHOMMONAN, CUAHANG } from '../FoodAppData/FoodData'; // Import dữ liệu từ FoodData
+import { NHOMMONAN, CUAHANG, IMAGES } from '../FoodAppData/FoodData'; // Import dữ liệu từ FoodData
 
 const HomeScreen = () => {
     const router = useRouter();
-    
+
     return (
         <View style={styles.container}>
             {/* Gradient Header */}
@@ -14,8 +14,32 @@ const HomeScreen = () => {
                 colors={['#00B4D8', '#0077B6']}
                 style={styles.header}
             >
-                <Text style={styles.headerTitle}>Giao đến</Text>
-                <Text style={styles.headerSubtitle}>Đà Nẵng, Việt Nam</Text>
+                <View style={styles.headerLeft}>
+                    <View style={styles.headerLeftBack}>
+                        <TouchableOpacity>
+                            <Image
+                                style={{
+                                    width: 30,
+                                    height: 15,
+                                }}
+                                source={IMAGES.back}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.headerLeftDropDown}>
+                        <Text style={styles.headerLeftDropDownTitle}>Giao đến</Text>
+                        <Text style={styles.headerLeftDropDownSubTitle}>Đà Nẵng, Việt Nam</Text>
+                    </View>
+                </View>
+                <View style={styles.headerRight}>
+                    <TouchableOpacity>
+                        <Image style={styles.iconHeader} source={IMAGES.ringing}></Image>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Image style={styles.iconHeader} source={IMAGES.ringing}></Image>
+                    </TouchableOpacity>
+                </View>
+
             </LinearGradient>
 
             {/* Thanh tìm kiếm */}
@@ -44,7 +68,7 @@ const HomeScreen = () => {
 
                 {/* Banner (Bạn có thể thêm dữ liệu banner nếu có) */}
                 <View style={styles.bannerContainer}>
-                    {/* <Image source={require('../FoodAppData/FoodImage/banner.jpg')} style={styles.bannerImage} /> */}
+                    <Image source={IMAGES.discount} style={styles.bannerImage} />
                     <Text style={styles.bannerText}>Khuyến mãi đặc biệt 30%</Text>
                 </View>
 
@@ -76,19 +100,40 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     },
     header: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         height: 150,
-        paddingTop: 40,
         paddingHorizontal: 16,
+        paddingTop: 20,
     },
-    headerTitle: {
-        fontSize: 20,
+    headerLeft: {
+        width: 180,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    headerLeftBack: {
+        justifyContent: 'center',
+    },
+    headerRight: {
+        flexDirection: 'row',
+        width: 65,
+        justifyContent: 'space-between',
+    },
+    iconHeader: {
+        height: 30,
+        width: 30,
+    },
+    headerLeftDropDownTitle: {
+        fontSize: 13,
         color: '#FFFFFF',
-        fontWeight: 'bold',
     },
-    headerSubtitle: {
+    headerLeftDropDownSubTitle: {
         fontSize: 16,
         color: '#FFFFFF',
         marginTop: 5,
+        fontWeight: 'bold',
     },
     searchContainer: {
         marginTop: -20,

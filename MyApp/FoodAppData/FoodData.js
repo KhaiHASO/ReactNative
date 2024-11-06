@@ -1,6 +1,7 @@
 
 export const IMAGES = {
     star: require('./FoodImage/star.jpeg'),
+    back: require('./FoodImage/back.png'),
     menu: require('./FoodImage/menu.png'),
     ringing: require('./FoodImage/ringing.png'),
     annhanh: require('./FoodImage/annhanh.png'),
@@ -21,6 +22,7 @@ export const IMAGES = {
     highland: require('./FoodImage/highland.jpg'),
     king: require('./FoodImage/kingcoffe.png'),
     z88: require('./FoodImage/z88.jpg'),
+    discount: require('./FoodImage/discount.jpg')
 }
 
 export const NHOMMONAN = [

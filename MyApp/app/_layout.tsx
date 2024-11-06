@@ -1,21 +1,22 @@
 import { Stack } from "expo-router";
+import { ICONS } from '../FoodCirclesData/FoodData';
+import { View, Image, TouchableOpacity } from 'react-native';
 
 export default function RootLayout() {
   return (
     <Stack
-      initialRouteName="index" // Đặt màn hình LoginScreen là màn hình khởi động
+      initialRouteName="index"
       screenOptions={{
-        headerTintColor: '#fff', // Màu của nút trong header
-        headerTitleAlign: 'center', // Căn giữa tiêu đề header
-        headerTransparent: true, // Làm toàn bộ header của stack trong suốt
-        headerTitle: '', // Ẩn tiêu đề mặc định trên tất cả các màn hình
+        headerTintColor: '#fff',
+        headerTransparent: true, // Đặt header trong suốt
+        headerTitle: '', // Bỏ tiêu đề
       }}
     >
       {/* Login Screen */}
       <Stack.Screen
         name="LoginScreen"
         options={{
-          headerShown: true, // Hiển thị header trong suốt
+          headerShown: false,
         }}
       />
 
@@ -23,8 +24,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="HomeScreen"
         options={{
-          headerShown: true,
-          headerTitle: 'Trang chủ', // Tiêu đề cho Home Screen
+          headerShown: false,
         }}
       />
 
@@ -32,9 +32,10 @@ export default function RootLayout() {
       <Stack.Screen
         name="StoreDetailScreen"
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
       />
+
     </Stack>
   );
 }

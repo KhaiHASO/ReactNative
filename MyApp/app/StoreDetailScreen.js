@@ -1,42 +1,26 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Dimensions } from 'react-native';
+import { THUCAN, ICONS } from '../FoodCirclesData/FoodData';
 
 const screenWidth = Dimensions.get('window').width;
-
-const storeData = {
-    name: "Gadana - Chân Gà Cay",
-    rating: 4.1,
-    reviews: "50+ đánh giá",
-    openTime: "08:00 - 23:00 (T2 - CN)",
-    deliveryTime: "11-20 phút",
-    categories: ["Thức ăn", "Đồ uống", "Món khai vị", "Món chính"],
-    products: [
-        { id: 1, name: "Mực chiên mắm", price: "35.000đ", originalPrice: "60.000đ", sold: "1 đã bán", rating: 4.1, discount: "Giảm 30%", image: "https://example.com/muc_chien_mam.jpg" },
-        { id: 2, name: "Thịt xào hành ớt", price: "35.000đ", originalPrice: "60.000đ", sold: "1 đã bán", rating: 4.1, discount: "Giảm 30%", image: "https://example.com/thit_xao.jpg" },
-        { id: 3, name: "Nem chua rán", price: "35.000đ", originalPrice: "60.000đ", sold: "1 đã bán", rating: 4.1, discount: "Giảm 30%", image: "https://example.com/nem_chua.jpg" },
-        { id: 4, name: "Thân lăn chiên", price: "35.000đ", originalPrice: "60.000đ", sold: "1 đã bán", rating: 4.1, discount: "Giảm 30%", image: "https://example.com/than_lan.jpg" }
-    ]
-};
 
 const StoreDetailScreen = () => {
     const [selectedCategory, setSelectedCategory] = useState("Thức ăn");
 
     const renderProduct = ({ item }) => (
         <View style={styles.productContainer}>
-            <Image source={{ uri: item.image }} style={styles.productImage} />
+            <Image source={item.icon} style={styles.productImage} />
             <View style={styles.productInfo}>
                 <Text style={styles.productName}>{item.name}</Text>
                 <View style={styles.priceContainer}>
-                    <Text style={styles.productPrice}>{item.price}</Text>
-                    <Text style={styles.productOriginalPrice}>{item.originalPrice}</Text>
+                    <Text style={styles.productPrice}>35.000đ</Text>
+                    <Text style={styles.productOriginalPrice}>60.000đ</Text>
                 </View>
                 <View style={styles.additionalInfo}>
-                    <Text style={styles.soldText}>{item.sold}</Text>
-                    {item.discount && (
-                        <View style={styles.discountBadge}>
-                            <Text style={styles.discountText}>{item.discount}</Text>
-                        </View>
-                    )}
+                    <Text style={styles.soldText}>1 đã bán</Text>
+                    <View style={styles.discountBadge}>
+                        <Text style={styles.discountText}>Giảm 30%</Text>
+                    </View>
                 </View>
             </View>
             <TouchableOpacity style={styles.addButton}>
@@ -45,25 +29,25 @@ const StoreDetailScreen = () => {
         </View>
     );
 
-    // Header component để hiển thị phần thông tin cửa hàng và tab
     const ListHeader = () => (
         <>
-            {/* Header Image */}
-            <Image source={{ uri: 'https://example.com/store_banner.jpg' }} style={styles.bannerImage} />
-
-            {/* Store Info */}
-            <View style={styles.storeInfo}>
-                <Text style={styles.storeName}>{storeData.name}</Text>
-                <Text style={styles.storeDetails}>{storeData.openTime} | {storeData.deliveryTime}</Text>
-                <View style={styles.ratingContainer}>
-                    <Text style={styles.storeRating}>⭐ {storeData.rating}</Text>
-                    <Text style={styles.storeReviews}>{storeData.reviews}</Text>
+            <View style={styles.headerContainer}>
+                <Image source={ICONS.hinhnen} style={styles.bannerImage} />
+                <View style={styles.logoContainer}>
+                    <Image source={ICONS.logo} style={styles.logo} />
+                </View>
+                <View style={styles.storeInfo}>
+                    <Text style={styles.storeName}>Gadana - Chân Gà Cay</Text>
+                    <Text style={styles.storeDetails}>08:00 - 23:00 (T2 - CN) | 11-20 phút giao hàng</Text>
+                    <View style={styles.ratingContainer}>
+                        <Text style={styles.storeRating}>⭐ 4.1</Text>
+                        <Text style={styles.storeReviews}>(50+ đánh giá)</Text>
+                    </View>
                 </View>
             </View>
 
-            {/* Category Tabs */}
             <View style={styles.categoryTabs}>
-                {storeData.categories.map((category) => (
+                {["Thức ăn", "Đồ uống", "Món khai vị", "Món chính"].map((category) => (
                     <TouchableOpacity
                         key={category}
                         onPress={() => setSelectedCategory(category)}
@@ -84,7 +68,7 @@ const StoreDetailScreen = () => {
 
     return (
         <FlatList
-            data={storeData.products}
+            data={THUCAN}
             renderItem={renderProduct}
             keyExtractor={(item) => item.id.toString()}
             ListHeaderComponent={ListHeader}
@@ -94,17 +78,28 @@ const StoreDetailScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFFFFF',
+    headerContainer: {
+        position: 'relative',
+        alignItems: 'center',
     },
     bannerImage: {
         width: screenWidth,
-        height: 200,
+        height: 150,
         resizeMode: 'cover',
     },
+    logoContainer: {
+        position: 'absolute',
+        top: 100,
+        backgroundColor: '#FFF',
+        borderRadius: 50,
+        padding: 5,
+    },
+    logo: {
+        width: 80,
+        height: 80,
+    },
     storeInfo: {
-        padding: 16,
+        paddingTop: 50,
         alignItems: 'center',
     },
     storeName: {
