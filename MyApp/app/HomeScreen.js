@@ -3,9 +3,13 @@ import { View, Text, TextInput, Image, FlatList, StyleSheet, ScrollView, Touchab
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { NHOMMONAN, CUAHANG, IMAGES } from '../FoodAppData/FoodData'; // Import dữ liệu từ FoodData
+import { useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
 
 const HomeScreen = () => {
     const router = useRouter();
+    const [selectedLocation, setSelectedLocation] = useState("Đà Nẵng, Việt Nam");
+    const [isPickerVisible, setIsPickerVisible] = useState(false);
 
     return (
         <View style={styles.container}>
@@ -28,8 +32,17 @@ const HomeScreen = () => {
                     </View>
                     <View style={styles.headerLeftDropDown}>
                         <Text style={styles.headerLeftDropDownTitle}>Giao đến</Text>
-                        <Text style={styles.headerLeftDropDownSubTitle}>Đà Nẵng, Việt Nam</Text>
-                    </View>
+                        <Picker
+                            selectedValue={selectedLocation}
+                            onValueChange={(itemValue, itemIndex) => setSelectedLocation(itemValue)}
+                            style={styles.pickerStyle}
+                            dropdownIconColor={'white'}
+                        >
+                            <Picker.Item label="Đà Nẵng, Việt Nam" value="Đà Nẵng, Việt Nam" />
+                            <Picker.Item label="Hà Nội, Việt Nam" value="Hà Nội, Việt Nam" />
+                            <Picker.Item label="Hồ Chí Minh, Việt Nam" value="Hồ Chí Minh, Việt Nam" />
+                        </Picker>
+                    </View>    
                 </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity>
@@ -39,6 +52,7 @@ const HomeScreen = () => {
                         <Image style={styles.iconHeader} source={IMAGES.ringing}></Image>
                     </TouchableOpacity>
                 </View>
+
 
             </LinearGradient>
 
@@ -109,12 +123,15 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     headerLeft: {
-        width: 180,
+        width: 270,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     headerLeftBack: {
         justifyContent: 'center',
+    },
+    headerLeftDropDown:{
+
     },
     headerRight: {
         flexDirection: 'row',
@@ -126,14 +143,14 @@ const styles = StyleSheet.create({
         width: 30,
     },
     headerLeftDropDownTitle: {
-        fontSize: 13,
+        fontSize: 15,
         color: '#FFFFFF',
     },
-    headerLeftDropDownSubTitle: {
-        fontSize: 16,
-        color: '#FFFFFF',
-        marginTop: 5,
+    pickerStyle: {
+        width: 220,
+        color: '#FFFFFF', 
         fontWeight: 'bold',
+        backgroundColor:'transparent'
     },
     searchContainer: {
         marginTop: -20,
