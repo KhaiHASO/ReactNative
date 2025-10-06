@@ -7,7 +7,7 @@ export default function FlexboxIntroDemo() {
 			<Text style={styles.title}>Flexbox trong React Native</Text>
 
 			{/* 1) Trục chính (main axis) và trục phụ (cross axis) */}
-			<Text style={styles.section}>1) Trục: flexDirection = 'row' | 'column'</Text>
+			<Text style={styles.section}>1 Trục: flexDirection = 'row' | 'column'</Text>
 			<Text style={styles.note}>Row: trục chính là ngang, Column: trục chính là dọc</Text>
 			<View style={[styles.box, { height: 72 }]}>
 				<Text style={styles.caption}>row</Text>
@@ -27,7 +27,7 @@ export default function FlexboxIntroDemo() {
 			</View>
 
 			{/* 2) justifyContent (căn theo trục chính) */}
-			<Text style={styles.section}>2) justifyContent (trục chính)</Text>
+			<Text style={styles.section}>2 justifyContent (trục chính)</Text>
 			<View style={styles.box}>
 				<Text style={styles.caption}>space-between</Text>
 				<View style={[styles.row, styles.h56, { justifyContent: 'space-between' }]}>
@@ -44,7 +44,7 @@ export default function FlexboxIntroDemo() {
 			</View>
 
 			{/* 3) alignItems (căn theo trục phụ) */}
-			<Text style={styles.section}>3) alignItems (trục phụ)</Text>
+			<Text style={styles.section}>3 alignItems (trục phụ)</Text>
 			<View style={styles.box}>
 				<Text style={styles.caption}>alignItems: 'flex-start' | 'center' | 'flex-end'</Text>
 				<View style={[styles.row, styles.h80, { alignItems: 'flex-start' }]}>
@@ -65,7 +65,7 @@ export default function FlexboxIntroDemo() {
 			</View>
 
 			{/* 4) alignSelf (ghi đè từng phần tử) */}
-			<Text style={styles.section}>4) alignSelf (ghi đè trên từng item)</Text>
+			<Text style={styles.section}>4 alignSelf (ghi đè trên từng item)</Text>
 			<View style={styles.box}>
 				<Text style={styles.caption}>alignSelf: 'flex-start' | 'center' | 'flex-end'</Text>
 				<View style={[styles.row, styles.h100, { alignItems: 'center' }]}>
@@ -76,7 +76,7 @@ export default function FlexboxIntroDemo() {
 			</View>
 
 			{/* 5) flexWrap (xuống dòng khi thiếu chỗ) */}
-			<Text style={styles.section}>5) flexWrap (tự xuống dòng)</Text>
+			<Text style={styles.section}>5 flexWrap (tự xuống dòng)</Text>
 			<View style={styles.box}>
 				<Text style={styles.caption}>wrap: các item tự xuống hàng khi không đủ chỗ</Text>
 				<View style={[styles.row, styles.wrapArea, { flexWrap: 'wrap' }]}>

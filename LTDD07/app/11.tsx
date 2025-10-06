@@ -1,6 +1,5 @@
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+//component 
 export default function FixedDimensionsDemo() {
 	return (
 		<View style={styles.screen}>

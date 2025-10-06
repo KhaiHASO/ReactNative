@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dine-hub-mongo-schema",
+  "title": "DineHub MongoDB Collections",
+  "description": "Inferred collections and validation schemas based on React Native app types. Adjust as backend needs evolve.",
+  "collections": {
+    "users": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["email"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "user_name": {"bsonType": "string"},
+          "email": {"bsonType": "string", "description": "Unique email"},
+          "password_hash": {"bsonType": "string"},
+          "phone_number": {"bsonType": "string"},
+          "otp": {"bsonType": "string"},
+          "code": {"bsonType": "string"},
+          "created_at": {"bsonType": "date"},
+          "updated_at": {"bsonType": "date"}
+        }
+      },
+      "indexes": [
+        {
+          "keys": {"email": 1},
+          "options": {"unique": true, "name": "uniq_email"}
+        }
+      ]
+    },
+
+    "categories": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["name"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "name": {"bsonType": "string"},
+          "image": {"bsonType": "string"},
+          "quantity": {"bsonType": "int"},
+          "created_at": {"bsonType": "date"},
+          "updated_at": {"bsonType": "date"}
+        }
+      },
+      "indexes": [
+        {
+          "keys": {"name": 1},
+          "options": {"unique": true, "name": "uniq_category_name"}
+        }
+      ]
+    },
+
+    "products": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["name", "price", "image", "rating"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "name": {"bsonType": "string"},
+          "weight": {"bsonType": ["int", "double"]},
+          "calories": {"bsonType": ["int", "double"]},
+          "price": {"bsonType": ["int", "double"]},
+          "old_price": {"bsonType": ["int", "double"]},
+          "rating": {"bsonType": ["int", "double"]},
+          "image": {"bsonType": "string"},
+          "images": {
+            "bsonType": ["string", "array"],
+            "items": {"bsonType": "string"}
+          },
+          "sizes": {"bsonType": "array", "items": {"bsonType": "string"}},
+          "size": {"bsonType": "string"},
+          "colors": {"bsonType": "array", "items": {"bsonType": "string"}},
+          "color": {"bsonType": "string"},
+          "description": {"bsonType": "string"},
+          "categories": {
+            "bsonType": ["string", "array"],
+            "items": {"bsonType": "string"}
+          },
+          "category": {"bsonType": "array", "items": {"bsonType": "string"}},
+          "is_bestseller": {"bsonType": "bool"},
+          "is_featured": {"bsonType": "bool"},
+          "is_out_of_stock": {"bsonType": "bool"},
+          "is_new": {"bsonType": "bool"},
+          "created_at": {"bsonType": "date"},
+          "updated_at": {"bsonType": "date"}
+        }
+      },
+      "indexes": [
+        {
+          "keys": {"name": 1},
+          "options": {
+            "name": "idx_product_name",
+            "collation": {"locale": "en", "strength": 2}
+          }
+        },
+        {"keys": {"category": 1}, "options": {"name": "idx_product_category"}},
+        {"keys": {"is_featured": 1}, "options": {"name": "idx_featured"}},
+        {"keys": {"is_bestseller": 1}, "options": {"name": "idx_bestseller"}}
+      ]
+    },
+
+    "reviews": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["product_id", "name", "rating", "comment", "date"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "product_id": {
+            "bsonType": ["objectId", "string"],
+            "description": "FK to products._id"
+          },
+          "user_id": {
+            "bsonType": ["objectId", "string"],
+            "description": "Optional FK to users._id"
+          },
+          "name": {"bsonType": "string"},
+          "rating": {"bsonType": ["int", "double"]},
+          "comment": {"bsonType": "string"},
+          "image": {"bsonType": "string"},
+          "date": {"bsonType": ["string", "date"]}
+        }
+      },
+      "indexes": [
+        {
+          "keys": {"product_id": 1, "date": -1},
+          "options": {"name": "idx_reviews_product_date"}
+        }
+      ]
+    },
+
+    "promocodes": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["name", "code", "discount", "expires_at"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "name": {"bsonType": "string"},
+          "code": {"bsonType": "string"},
+          "discount": {"bsonType": ["int", "double"]},
+          "expires_at": {"bsonType": ["string", "date"]},
+          "created_at": {"bsonType": "date"}
+        }
+      },
+      "indexes": [
+        {
+          "keys": {"code": 1},
+          "options": {"unique": true, "name": "uniq_promocode_code"}
+        },
+        {"keys": {"expires_at": 1}, "options": {"name": "idx_expires_at"}}
+      ]
+    },
+
+    "notifications": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["title", "date"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "title": {"bsonType": "string"},
+          "image": {"bsonType": "string"},
+          "description": {"bsonType": "string"},
+          "date": {"bsonType": ["string", "date"]}
+        }
+      },
+      "indexes": [
+        {"keys": {"date": -1}, "options": {"name": "idx_notification_date"}}
+      ]
+    },
+
+    "carousels": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["title_line_1", "title_line_2", "image", "button_text"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "title_line_1": {"bsonType": "string"},
+          "title_line_2": {"bsonType": "string"},
+          "image": {"bsonType": "string"},
+          "button_text": {"bsonType": "string"},
+          "created_at": {"bsonType": "date"}
+        }
+      }
+    },
+
+    "banners": {
+      "validation": {
+        "bsonType": "object",
+        "required": ["title", "title1", "title2", "image", "btnText"],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "title": {"bsonType": "string"},
+          "title1": {"bsonType": "string"},
+          "title2": {"bsonType": "string"},
+          "image": {"bsonType": "string"},
+          "btnText": {"bsonType": "string"},
+          "description1": {"bsonType": "string"},
+          "description2": {"bsonType": "string"},
+          "created_at": {"bsonType": "date"}
+        }
+      }
+    },
+
+    "orders": {
+      "validation": {
+        "bsonType": "object",
+        "required": [
+          "user_id",
+          "items",
+          "subtotal",
+          "delivery",
+          "total",
+          "status"
+        ],
+        "properties": {
+          "_id": {"bsonType": ["objectId", "string"]},
+          "user_id": {
+            "bsonType": ["objectId", "string"],
+            "description": "FK to users._id"
+          },
+          "items": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "required": ["product_id", "name", "price", "quantity"],
+              "properties": {
+                "product_id": {"bsonType": ["objectId", "string"]},
+                "name": {"bsonType": "string"},
+                "price": {"bsonType": ["int", "double"]},
+                "quantity": {"bsonType": "int"},
+                "size": {"bsonType": "string"},
+                "color": {"bsonType": "string"}
+              }
+            }
+          },
+          "subtotal": {"bsonType": ["int", "double"]},
+          "delivery": {"bsonType": ["int", "double"]},
+          "discount": {"bsonType": ["int", "double"]},
+          "total": {"bsonType": ["int", "double"]},
+          "status": {
+            "bsonType": "string",
+            "enum": [
+              "pending",
+              "paid",
+              "preparing",
+              "delivering",
+              "delivered",
+              "cancelled"
+            ]
+          },
+          "shipping_address": {"bsonType": "object"},
+          "payment_method": {"bsonType": "string"},
+          "promocode_code": {"bsonType": "string"},
+          "created_at": {"bsonType": "date"},
+          "updated_at": {"bsonType": "date"}
+        }
+      },
+      "indexes": [
+        {
+          "keys": {"user_id": 1, "created_at": -1},
+          "options": {"name": "idx_orders_user_created"}
+        },
+        {"keys": {"status": 1}, "options": {"name": "idx_orders_status"}}
+      ]
+    }
+  }
+}

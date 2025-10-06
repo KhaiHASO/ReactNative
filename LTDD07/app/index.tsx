@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import FixedDimensionsExample from "./11";
+import PercentageDimensionsExample from "./12";
 export default function Index() {
   return (
     <View
@@ -9,7 +9,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <FixedDimensionsExample />
+      {/* <FixedDimensionsExample /> */}
+      <PercentageDimensionsExample />
     </View>
   );
 }

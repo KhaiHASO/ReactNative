@@ -1,0 +1,116 @@
+I'll grab the server port from `app.js` to format each endpoint as full URLs, then list them all explicitly.
+
+[1 tool called]
+
+Dưới đây là danh sách đầy đủ endpoint dạng URL đầy đủ, mặc định PORT=3000 (có thể thay bằng PORT thực tế nếu bạn cấu hình `.env`):
+
+- Hệ thống
+  - GET `http://localhost:3000/`
+  - GET `http://localhost:3000/health`
+  - GET `http://localhost:3000/uploads/*` (static)
+
+- Auth (`/api/auth`)
+  - POST `http://localhost:3000/api/auth/user/create`
+  - POST `http://localhost:3000/api/auth/login`
+  - GET `http://localhost:3000/api/auth/me`
+  - PUT `http://localhost:3000/api/auth/user/update`
+  - PUT `http://localhost:3000/api/auth/change-password`
+  - POST `http://localhost:3000/api/auth/user/exists`
+  - POST `http://localhost:3000/api/auth/email/exists`
+  - POST `http://localhost:3000/api/auth/email/verify`
+  - POST `http://localhost:3000/api/auth/email/confirm`
+
+- Users (`/api/users`)
+  - GET `http://localhost:3000/api/users`
+  - GET `http://localhost:3000/api/users/:id`
+  - PUT `http://localhost:3000/api/users/:id`
+  - DELETE `http://localhost:3000/api/users/:id`
+
+- Categories (`/api/categories`)
+  - GET `http://localhost:3000/api/categories`
+  - GET `http://localhost:3000/api/categories/:id`
+  - POST `http://localhost:3000/api/categories`
+  - PUT `http://localhost:3000/api/categories/:id`
+  - DELETE `http://localhost:3000/api/categories/:id`
+
+- Products (`/api/products`)
+  - GET `http://localhost:3000/api/products`
+  - GET `http://localhost:3000/api/products/:id`
+  - POST `http://localhost:3000/api/products`
+  - PUT `http://localhost:3000/api/products/:id`
+  - DELETE `http://localhost:3000/api/products/:id`
+  - GET `http://localhost:3000/api/products/featured/all`
+  - GET `http://localhost:3000/api/products/bestseller/all`
+
+- Reviews (`/api/reviews`)
+  - GET `http://localhost:3000/api/reviews/product/:productId`
+  - GET `http://localhost:3000/api/reviews`
+  - GET `http://localhost:3000/api/reviews/:id`
+  - POST `http://localhost:3000/api/reviews`
+  - PUT `http://localhost:3000/api/reviews/:id`
+  - DELETE `http://localhost:3000/api/reviews/:id`
+
+- Promocodes (mounted 2 base path: `/api/promocodes` và `/api/promocode`)
+  - GET `http://localhost:3000/api/promocodes`
+  - GET `http://localhost:3000/api/promocodes/:id`
+  - POST `http://localhost:3000/api/promocodes/validate`
+  - POST `http://localhost:3000/api/promocodes`
+  - PUT `http://localhost:3000/api/promocodes/:id`
+  - DELETE `http://localhost:3000/api/promocodes/:id`
+  - (Tương tự các URL trên với base `/api/promocode/...`)
+
+- Discount (`/api/discount`)
+  - GET `http://localhost:3000/api/discount`
+  - GET `http://localhost:3000/api/discount/:id`
+  - POST `http://localhost:3000/api/discount/validate`
+  - POST `http://localhost:3000/api/discount`
+  - PUT `http://localhost:3000/api/discount/:id`
+  - DELETE `http://localhost:3000/api/discount/:id`
+
+- Notifications (`/api/notifications`)
+  - GET `http://localhost:3000/api/notifications`
+  - GET `http://localhost:3000/api/notifications/:id`
+  - POST `http://localhost:3000/api/notifications`
+  - PUT `http://localhost:3000/api/notifications/:id`
+  - DELETE `http://localhost:3000/api/notifications/:id`
+
+- Carousels/Slides (mounted 2 base path: `/api/slides` và `/api/carousels`)
+  - GET `http://localhost:3000/api/carousels`
+  - GET `http://localhost:3000/api/carousels/:id`
+  - POST `http://localhost:3000/api/carousels`
+  - PUT `http://localhost:3000/api/carousels/:id`
+  - DELETE `http://localhost:3000/api/carousels/:id`
+  - (Tương tự các URL trên với base `/api/slides/...`)
+
+- Banners (`/api/banners`)
+  - GET `http://localhost:3000/api/banners`
+  - GET `http://localhost:3000/api/banners/:id`
+  - POST `http://localhost:3000/api/banners`
+  - PUT `http://localhost:3000/api/banners/:id`
+  - DELETE `http://localhost:3000/api/banners/:id`
+
+- Orders
+  - GET `http://localhost:3000/api/orders`
+  - GET `http://localhost:3000/api/orders/admin`
+  - GET `http://localhost:3000/api/orders/:id`
+  - POST `http://localhost:3000/api/orders`
+  - PUT `http://localhost:3000/api/orders/:id/status`
+  - PUT `http://localhost:3000/api/orders/:id/cancel`
+  - DELETE `http://localhost:3000/api/orders/:id`
+  - POST `http://localhost:3000/api/order/create`
+
+- Tags (`/api/tags`)
+  - GET `http://localhost:3000/api/tags`
+  - GET `http://localhost:3000/api/tags/:id`
+  - POST `http://localhost:3000/api/tags`
+  - PUT `http://localhost:3000/api/tags/:id`
+  - DELETE `http://localhost:3000/api/tags/:id`
+
+- Uploads (`/api/upload`)
+  - POST `http://localhost:3000/api/upload/image`
+  - POST `http://localhost:3000/api/upload/images`
+  - POST `http://localhost:3000/api/upload/product-images`
+  - POST `http://localhost:3000/api/upload/category-image`
+  - POST `http://localhost:3000/api/upload/banner-image`
+
+Bạn muốn mình xuất ra dạng bảng CSV/Markdown để copy vào tài liệu không?
